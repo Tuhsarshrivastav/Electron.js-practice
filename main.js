@@ -9,6 +9,7 @@ function createWindow() {
     },
   });
   windows.loadFile("index.html");
+  windows.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow);
