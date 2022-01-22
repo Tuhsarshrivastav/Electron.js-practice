@@ -13,10 +13,17 @@ function createWindow() {
       nodeIntegration: true,
     },
   });
-  let child = new BrowserWindow({ parent: windows });
-  child.loadFile("index.html");
-  windows.loadFile("child.html");
+
+  windows.loadFile("index.html");
   windows.webContents.openDevTools();
 }
 
-app.whenReady().then(createWindow);
+app.on("before-quit", () => {
+  alert("you want to quit");
+});
+
+// app.whenReady().then(createWindow);
+app.on("ready", () => {
+  createWindow();
+  console.log("app is ready");
+});
