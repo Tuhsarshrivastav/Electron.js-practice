@@ -1,15 +1,22 @@
 const { app, BrowserWindow } = require("electron");
-
+const windowStateKeeper = require("electron-window-state");
+let win;
 function createWindow() {
-  const windows = new BrowserWindow({
-    height: 800,
-    width: 600,
-    frame: false,
+  let mainWindowState = windowStateKeeper({
+    defaultWidth: 800,
+    defaultHeight: 600,
+  });
+  const win = new BrowserWindow({
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    height: mainWindowState.height,
+    width: mainWindowState.width,
     webPreferences: {
       nodeIntegration: true,
     },
   });
-  windows.loadFile("index.html");
+  win.loadFile("index.html");
+  mainWindowState.manage(win);
 }
 
 app.whenReady().then(createWindow);
