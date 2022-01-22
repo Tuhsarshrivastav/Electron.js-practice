@@ -8,12 +8,14 @@ function createWindow() {
     // backgroundColor: "#888",
     // title: "trying electron",
     // alwaysOnTop: true,
-    resizable:true
+    resizable: true,
     webPreferences: {
       nodeIntegration: true,
     },
   });
-  windows.loadFile("index.html");
+  let child = new BrowserWindow({ parent: windows });
+  child.loadFile("index.html");
+  windows.loadFile("child.html");
   windows.webContents.openDevTools();
 }
 
