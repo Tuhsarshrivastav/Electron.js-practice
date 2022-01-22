@@ -17,6 +17,15 @@ function createWindow() {
   });
   win.loadFile("index.html");
   mainWindowState.manage(win);
+  let wc = win.webContents;
+  wc.on("dom-ready", () => {
+    console.log("app dom is ready");
+  });
 }
 
-app.whenReady().then(createWindow);
+app
+  .whenReady()
+  .then(createWindow)
+  .catch((err) => {
+    console.log(err);
+  });
